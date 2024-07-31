@@ -30,14 +30,15 @@ function totalCost(){
 }
 
 function Print(){
-    document.getElementById('Print').style.visibility ='hidden';
-    document.getElementById('Submit').style.visibility ='hidden';
-    document.getElementById('Copyright').style.visibility ='hidden';
+    document.getElementById('Print').style.opacity=0;
+    document.getElementById('Submit').style.opacity=0;
+    document.getElementById('Copyright').style.opacity=0;
 
     window.print();
-    document.getElementById('Print').style.visibility ='visible';
-    document.getElementById('Submit').style.visibility ='visible';
-    document.getElementById('Copyright').style.visibility ='visible';
+
+    document.getElementById('Print').style.opacity=100;
+    document.getElementById('Submit').style.opacity=100;
+    document.getElementById('Copyright').style.opacity=100;
 }
 
 function billNo(){     
