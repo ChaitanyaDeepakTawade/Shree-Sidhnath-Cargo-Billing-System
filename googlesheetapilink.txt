@@ -1,0 +1,77 @@
+get ("https://script.google.com/macros/s/AKfycbyxd2HG3OwRYZTuYtFn_JbyKvt8YHy72Gezqwxp14GgFm7PrkBlLH5JJmyhOMDJ07ud/exec");
+
+post ("https://script.google.com/macros/s/AKfycbx4vR8nOmHB9rGJtx9huSCu6o8iLp17A0Fj5xTWv-ZFpTxOk8AaLFAPMimI8rASl57t/exec");
+
+
+Appscript code
+function doGet() {
+  var doc = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = doc.getSheetByName('Sheet1');
+  var values = sheet.getDataRange().getValues();
+
+  var output = [];
+  for(var i=1;i<values.length; i++) {
+    var row = {} ;
+    row['Bill No'] = values[i][0];
+    row['Date'] = values[i][1];
+    row['To'] = values[i][2];
+    row['LR Number'] = values[i][3];
+    row['From'] = values[i][4];
+    row['Destination'] = values[i][5];
+    row['Vehicle Number'] = values[i][6];
+    row['Vehicle Type'] = values[i][7];
+    row['Fright'] = values[i][8];
+    row['Extra Charges'] = values[i][9];
+    row['Advance'] = values[i][10];
+    row['Total'] = values[i][11];
+    row['Status'] = values[i][12];
+    output.push(row);
+  
+  }
+  console.log(output);
+  return ContentService.createTextOutput(JSON.stringify({data:output})).setMimeType(ContentService.MimeType.JSON);
+}
+
+
+//post
+const sheetName = 'Sheet1'
+const scriptProp = PropertiesService.getScriptProperties()
+
+function intialSetup () {
+  const activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()
+  scriptProp.setProperty('key', activeSpreadsheet.getId())
+}
+
+function doPost (e) {
+  const lock = LockService.getScriptLock()
+  lock.tryLock(10000)
+
+  try {
+    const doc = SpreadsheetApp.openById(scriptProp.getProperty('key'))
+    const sheet = doc.getSheetByName(sheetName)
+
+    const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0]
+    const nextRow = sheet.getLastRow() + 1
+
+    const newRow = headers.map(function(header) {
+      return header === 'Date' ? new Date() : e.parameter[header]
+    })
+
+    sheet.getRange(nextRow, 1, 1, newRow.length).setValues([newRow])
+
+    return ContentService
+      .createTextOutput(JSON.stringify({ 'result': 'success', 'row': nextRow }))
+      .setMimeType(ContentService.MimeType.JSON)
+  }
+
+  catch (e) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ 'result': 'error', 'error': e }))
+      .setMimeType(ContentService.MimeType.JSON)
+  }
+
+  finally {
+    lock.releaseLock()
+  }
+}
+
