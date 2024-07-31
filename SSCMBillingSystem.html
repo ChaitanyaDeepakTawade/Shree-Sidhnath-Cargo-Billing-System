@@ -7,35 +7,17 @@
     <meta name="author" content="Chaitanya Tawade">
     <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    
-    <!-- for remove page link at the time of printing -->
-    <style media="print">
-      @page {
-       size: auto;
-       margin: 0;
-            }
-     </style>
-        <style>
-      @media print {
-          footer{
-          display: none;
-        }
-        #Print{
-          display: none;
-        }
-        #Submit{
-          display: none;
-        }
-      }
-     </style>
+    <link rel="stylesheet" href="style.css"/>
+
+
 </head>
 <body onload="billNo()">
   <!-- <body> -->
     <div class="container-fluid">
 
       <div class="row" style="margin-top: 10px;">
-            <h3 style="color: red;">SHREE SIDDHANATH CARGO</h3>
-            <address style="font-size: 10px;"> 
+            <h2 style="color: red;">SHREE SIDDHANATH CARGO</h2>
+            <address style="font-size: 12px;"> 
                 <span style="color: crimson;"><b> <i>20,22,24,32 FEET TRUCK & ODC ALL OVER INDIA</i> </b></span><br>
                 Katraj Kondawa Rd,Vidyanagar, Sr.No.21,Vishwa Gym <br>
                 Katraj, Pune, 411-046<br>
@@ -45,6 +27,7 @@
             </address>          
       </div>
       <div class="container-fluid">
+        
             <div class="row">
               <label for="BillNo" class="form-label" style="text-align: right; color: red;">Bill No : <span id="BillNo" > </span></label>
             </div>
@@ -126,11 +109,12 @@
               </div>
               <div class="col-md-12" style="text-align: center;">
 
-                <button type="button" class="btn btn-primary" id="Print"  value="Print" onclick="Print()"> <i class="fa fa-print" aria-hidden="true"></i> Print </button>
-                <input type="submit" class="btn btn-success" id="Submit" value="Submit" onClick="SubmitForm()"> 
+               <Print> <button type="button" class="btn btn-primary" id="Print"  value="Print" onclick="Print()"> <i class="fa fa-print" aria-hidden="true"></i> Print </button> </Print>
+               <Submit> <input type="submit" class="btn btn-success" id="Submit"  value="Submit" onClick="SubmitForm()"> </Submit>
               
               </div>               
         </div>   
+      
       </div> 
       <div class="container-fluid p-2" style="margin-top: 10%;">
    

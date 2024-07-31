@@ -30,10 +30,6 @@ function totalCost(){
 }
 
 function Print(){
-    document.getElementById('Print').style.display='none';
-    document.getElementById('Submit').style.display='none';
-
-
     window.print();
 
     document.getElementById('Print').style.display='inline';
@@ -77,25 +73,39 @@ async function SubmitForm()
     const data = {"To":To,"Date":DatE,"From":From,"Total":Total,"Fright":Fright,"Status":0,"Advance":Advance,"Bill No":BillNo,"LR Number":LRNO,"Destination":Destination,"Extra Charges":ExtraPermission,"Vehicle Number":VehicleNO, "Vehicle Type":VehicleType};
     
     console.log(data);
-
-    try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbx4vR8nOmHB9rGJtx9huSCu6o8iLp17A0Fj5xTWv-ZFpTxOk8AaLFAPMimI8rASl57t/exec', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: new URLSearchParams(data).toString()
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        alert('Form submitted successfully!');
-        location.reload();
-    } catch (error) {
-        console.error('Error:', error);
-        alert('An error occurred. Please try again.');
+    if(To.length==0 )
+    {
+        alert ("Please Enter Recipient Data...!");
+        document.getElementById("To").focus();
+    }else if (Fright.length==0){
+        alert ("Please Enter Fright Amount...!");
+        document.getElementById("Fright").focus();
+    }else if(Total.length==0){
+        alert("Please calculate total Amount . For that Press on total text.");
+        document.getElementById("total").focus();
     }
+    else{
+        try {
+            const response = await fetch('https://script.google.com/macros/s/AKfycbx4vR8nOmHB9rGJtx9huSCu6o8iLp17A0Fj5xTWv-ZFpTxOk8AaLFAPMimI8rASl57t/exec', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams(data).toString()
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            alert('Form submitted successfully!');
+            location.reload();
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again.');
+        }
+    }
+        
+    
 }
 
 function adjustHeight(el){

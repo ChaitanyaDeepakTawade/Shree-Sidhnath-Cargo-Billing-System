@@ -1,0 +1,16 @@
+/* for remove page link at the time of printing */
+@media print {
+    @page {
+          size: auto;
+          margin: 0;
+        }
+      footer{
+      display: none;
+    }
+      Print{
+      display: none;
+    }
+    Submit{
+      display: none;
+    }
+  }
