@@ -32,7 +32,7 @@ function totalCost(){
 function Print(){
     document.getElementById('Print').style.display='none';
     document.getElementById('Submit').style.display='none';
-    document.getElementById('Copyright').style.display='none';
+
 
     window.print();
 
