@@ -43,7 +43,7 @@ function billNo(){
               const data = await response.json();
               BillNo = parseInt(data.data[data.data.length-1]["Bill No"])+1;
              
-              document.getElementById('BillNo').value = BillNo;
+              document.getElementById('BillNo').innerHTML = BillNo;
             } catch (error) {
               console.error(error);
             }
