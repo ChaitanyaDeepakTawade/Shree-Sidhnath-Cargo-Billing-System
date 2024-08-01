@@ -1,6 +1,6 @@
 const billItems = [];
 
-let To , LRNO , From , VehicleNO ,VehicleType , Destination ,BillNo ;
+let To , LRNO , From , VehicleNO ,VehicleType , Destination ,BillNo = 0;
 let Fright = 0 , ExtraPermission = 0 , Advance = 0 , Total=0;
 
 function totalCost(){
