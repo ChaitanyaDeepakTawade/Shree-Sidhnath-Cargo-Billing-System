@@ -46,7 +46,7 @@ function billNo(){
 
               BillNo =parseInt(data.data[data.data.length-1]["Bill No"])+1;
 
-             
+               console.log(BillNo);
               document.getElementById('BillNo').innerHTML = BillNo;
             } catch (error) {
               console.error(error);
