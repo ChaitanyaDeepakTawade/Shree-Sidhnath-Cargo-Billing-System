@@ -7,10 +7,15 @@
       footer{
       display: none;
     }
-      Print{
+      span{
       display: none;
     }
-    Submit{
-      display: none;
+    #Signature{
+      position: absolute;
+      width: 100%;
+      right: 2%;
+      bottom: 5%;
+     
     }
+    
   }

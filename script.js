@@ -1,6 +1,6 @@
 const billItems = [];
 
-let To , LRNO , From , VehicleNO ,VehicleType , Destination ,BillNo = 0;
+let To , LRNO , From , VehicleNO ,VehicleType , Destination ,BillNo = 0 ;
 let Fright = 0 , ExtraPermission = 0 , Advance = 0 , Total=0;
 
 function totalCost(){
@@ -32,8 +32,7 @@ function totalCost(){
 function Print(){
     window.print();
 
-    document.getElementById('Print').style.display='inline';
-    document.getElementById('Submit').style.display='inline';
+    document.getElementsByTagName('span').style.display='inline';
     document.getElementById('Copyright').style.display='block';
 }
 
@@ -42,12 +41,9 @@ function billNo(){
             try {
               const response = await fetch("https://script.google.com/macros/s/AKfycbyxd2HG3OwRYZTuYtFn_JbyKvt8YHy72Gezqwxp14GgFm7PrkBlLH5JJmyhOMDJ07ud/exec");
               const data = await response.json();
+              BillNo = parseInt(data.data[data.data.length-1]["Bill No"])+1;
              
-
-              BillNo =parseInt(data.data[data.data.length-1]["Bill No"])+1;
-
-               console.log(BillNo);
-              document.getElementById('BillNo').innerHTML = BillNo;
+              document.getElementById('BillNo').value = BillNo;
             } catch (error) {
               console.error(error);
             }

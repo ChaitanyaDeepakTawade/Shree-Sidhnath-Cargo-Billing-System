@@ -11,14 +11,14 @@
 
 
 </head>
-<body onload="billNo()">
-  <!-- <body> -->
+<!-- <body onload="billNo()"> -->
+  <body>
     <div class="container-fluid">
 
       <div class="row" style="margin-top: 10px;">
-            <h2 style="color: red;">SHREE SIDDHANATH CARGO</h2>
-            <address style="font-size: 12px;"> 
-                <span style="color: crimson;"><b> <i>20,22,24,32 FEET TRUCK & ODC ALL OVER INDIA</i> </b></span><br>
+            <h1 style="color: red;">SHREE SIDDHANATH CARGO</h1>
+            <address style="font-size: 15px;"> 
+               <b> <i style="color: red;">20,22,24,32 FEET TRUCK & ODC ALL OVER INDIA</i> </b><br>
                 Katraj Kondawa Rd,Vidyanagar, Sr.No.21,Vishwa Gym <br>
                 Katraj, Pune, 411-046<br>
                 <b>Phone: 9987858484</b> <br>
@@ -29,7 +29,10 @@
       <div class="container-fluid">
         
             <div class="row">
-              <label for="BillNo" class="form-label" style="text-align: right; color: red;">Bill No : <span id="BillNo" > </span></label>
+           
+              <div class="col-12"  style="text-align: right; color: red;">
+                <label for="BillNo" >Bill No : </label> <label> 123</label>
+              </div>
             </div>
          
           <div class="border p-2 border-secondary" > 
@@ -109,14 +112,14 @@
               </div>
               <div class="col-md-12" style="text-align: center;">
 
-               <Print> <button type="button" class="btn btn-primary" id="Print"  value="Print" onclick="Print()"> <i class="fa fa-print" aria-hidden="true"></i> Print </button> </Print>
-               <Submit> <input type="submit" class="btn btn-success" id="Submit"  value="Submit" onClick="SubmitForm()"> </Submit>
+               <span style="text-align: center;"> <button type="button" class="btn btn-primary" id="Print"  value="Print" onclick="Print()"> <i class="fa fa-print" aria-hidden="true"></i> Print </button> 
+                <input type="submit" class="btn btn-success" id="Submit"  value="Submit" onClick="SubmitForm()"> </span>
               
               </div>               
         </div>   
       
       </div> 
-      <div class="container-fluid p-2" style="margin-top: 10%;">
+      <div class="container-fluid p-2" style="margin-top: 10%;" id="Signature">
    
         <p style="text-align:end;">Your Faithfully <br/>Shree Sidhnath Cargo Movers</p>
       </div>
