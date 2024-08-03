@@ -19,3 +19,13 @@
     }
     
   }
+
+@media only screen and (max-width: 600px) {
+#BillNoViewReport{
+      text-align: center;
+
+}
+#Search{
+    width : 100%;
+}
+}
