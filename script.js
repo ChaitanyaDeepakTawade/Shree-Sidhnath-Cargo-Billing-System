@@ -60,6 +60,7 @@ async function SubmitForm()
 {
     //BillNo = document.getElementById("BillNo").value;
     DatE = document.getElementById("DatE").value;
+    console.log(document.getElementById("DatE").value);
     To =document.getElementById("To").value;
     LRNO=document.getElementById("LRNO").value;
     From=document.getElementById("From").value;
@@ -71,7 +72,7 @@ async function SubmitForm()
     Total=document.getElementById("total").value;
     VehicleType=document.getElementById("VehicleType").value;
     Status=0;
-    const data = {"To":To,"Date":DatE,"From":From,"Total":Total,"Fright":Fright,"Status":0,"Advance":Advance,"Bill No":BillNo,"LR Number":LRNO,"Destination":Destination,"Extra Charges":ExtraPermission,"Vehicle Number":VehicleNO, "Vehicle Type":VehicleType};
+    const data = {"To":To,"LoadingDate":DatE,"From":From,"Total":Total,"Fright":Fright,"Status":0,"Advance":Advance,"Bill No":BillNo,"LR Number":LRNO,"Destination":Destination,"Extra Charges":ExtraPermission,"Vehicle Number":VehicleNO.toUpperCase(), "Vehicle Type":VehicleType.toUpperCase()};
     
     console.log(data);
     if(To.length==0 )
@@ -138,13 +139,8 @@ function search(){
 
             let SearchData= data.find((data) => data["Bill No"]==document.getElementById("BillNoViewReport").value);
             
-            
-            const date = new Date(SearchData.Date);
-            // Format the date to YYYY-MM-DD
-            const formattedDate = date.toISOString().split('T')[0];
-
-            console.log(formattedDate);
-            document.getElementById("DatE").value =  formattedDate;
+            console.log(SearchData);
+            document.getElementById("DatE").value = SearchData.Date;
             document.getElementById("To").value = SearchData.To;
             document.getElementById("LRNO").value = SearchData["LR Number"];           ;
             document.getElementById("From").value = SearchData.From;
