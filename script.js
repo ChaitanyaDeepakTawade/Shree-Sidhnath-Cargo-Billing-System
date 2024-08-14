@@ -58,6 +58,7 @@ function billNo(){
 
 async function SubmitForm()
 {
+   
     //BillNo = document.getElementById("BillNo").value;
     DatE = document.getElementById("DatE").value;
     console.log(document.getElementById("DatE").value);
@@ -87,6 +88,7 @@ async function SubmitForm()
         document.getElementById("total").focus();
     }
     else{
+        document.getElementById("Submit").disabled = true;
         try {
             const response = await fetch('https://script.google.com/macros/s/AKfycbx4vR8nOmHB9rGJtx9huSCu6o8iLp17A0Fj5xTWv-ZFpTxOk8AaLFAPMimI8rASl57t/exec', {
                 method: 'POST',
@@ -105,6 +107,8 @@ async function SubmitForm()
             console.error('Error:', error);
             alert('An error occurred. Please try again.');
         }
+
+        document.getElementById("Submit").disabled = false;
     }
         
     
@@ -124,11 +128,14 @@ function search(){
     {
         document.getElementById("viewBill").reset();
         console.log(document.getElementById("BillNoViewReport").value);
+        
         fetchData();
+   
     }
    
 
     async function fetchData() {
+        document.getElementById("Searchbtn").disabled = true;
         try {
 
             const response = await fetch("https://script.google.com/macros/s/AKfycbyxd2HG3OwRYZTuYtFn_JbyKvt8YHy72Gezqwxp14GgFm7PrkBlLH5JJmyhOMDJ07ud/exec");
@@ -137,26 +144,34 @@ function search(){
     
          
 
-            let SearchData= data.find((data) => data["Bill No"]==document.getElementById("BillNoViewReport").value);
-            
-            console.log(SearchData);
-            document.getElementById("DatE").value = SearchData.Date;
-            document.getElementById("To").value = SearchData.To;
-            document.getElementById("LRNO").value = SearchData["LR Number"];           ;
-            document.getElementById("From").value = SearchData.From;
-            document.getElementById("Destination").value = SearchData.Destination;
-            document.getElementById("VehicleNO").value = SearchData["Vehicle Number"];
-            document.getElementById("Fright").value = SearchData.Fright;
-            document.getElementById("ExtraPermission").value = SearchData["Extra Charges"];
-            document.getElementById("Advance").value = SearchData.Advance;
-            document.getElementById("total").value = SearchData.Total;
-            document.getElementById("VehicleType").value = SearchData["Vehicle Type"];
+            let SearchData = data.find((data) => data["Bill No"]==document.getElementById("BillNoViewReport").value);
 
+            if(SearchData == null){
+              alert("Bill Is Not Generated");
+              document.getElementById("BillNoViewReport").value="";
+              document.getElementById("BillNoViewReport").focus();
+
+            }else{
+                document.getElementById("DatE").value = SearchData.Date;
+                document.getElementById("To").value = SearchData.To;
+                document.getElementById("LRNO").value = SearchData["LR Number"];           ;
+                document.getElementById("From").value = SearchData.From;
+                document.getElementById("Destination").value = SearchData.Destination;
+                document.getElementById("VehicleNO").value = SearchData["Vehicle Number"];
+                document.getElementById("Fright").value = SearchData.Fright;
+                document.getElementById("ExtraPermission").value = SearchData["Extra Charges"];
+                document.getElementById("Advance").value = SearchData.Advance;
+                document.getElementById("total").value = SearchData.Total;
+                document.getElementById("VehicleType").value = SearchData["Vehicle Type"];
+            }
+
+          
       
 
         } catch (error) {
           console.error(error);
         } 
+        document.getElementById("Searchbtn").disabled = false;
     }
     
 }
