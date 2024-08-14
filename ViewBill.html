@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shree Siddhanath Cargo Billing System</title>
+    <title>Shree Siddhanath Cargo Billing System || View Bills</title>
     <meta name="author" content="Chaitanya Tawade">
     <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -11,8 +11,8 @@
 
 
 </head>
-<body onload="billNo()">
-  <!-- <body> -->
+<body>
+
     <div class="container-fluid">
 
       <div class="row" style="margin-top: 10px;">
@@ -21,59 +21,63 @@
                <b> <i style="color: red;  text-decoration: underline;">20,22,24,32 FEET TRUCK & ODC ALL OVER INDIA</i> </b><br>
                 Katraj Kondawa Rd,Vidyanagar, Sr.No.21,Vishwa Gym <br>
                 Katraj, Pune, 411-046<br>
-                <b>Phone: 9987858484</b> <br>
+                <b>Phone - 9987858484</b> <br>
                 <b>PAN NO - HKBPK6689B</b>
                 <hr/>
             </address>          
       </div>
+      <div class="col-sm-12 m-2 justify-content-center " > 
+        <div class="form-group row" style="text-align: right;">
+          <label for="BillNo" class="col-sm-2 col-md-2 col-form-label" style="font-weight:500; color: red;">Bill No</label>
+          <div class="col-sm-6 col-md-3" >
+            <input type="text" class="form-control" id="BillNoViewReport" placeholder="" style="font-weight:500; color: red;" required/>
+          </div>
+          <div class="col-sm-2 col-md-2"  style="text-align: left;">
+            <span><input type="submit" class="btn btn-primary" value="Search" id="Search" onclick="search()"/></span>  
+          </div>
+        </div>
+      </div>     
+      <form id="viewBill">
       <div class="container-fluid">
-        
-            <div class="row">
-           
-              <div class="col-12"  style="text-align: right; color: red;">
-                <label for="BillNo" >Bill No : </label> <label id="BillNo"> </label>
-              </div>
-            </div>
-         
+
           <div class="border p-2 border-secondary" > 
               <div class="col-md-12">
                 <label for="To" class="form-label" style="font-size: small;">To:</label>
-                <textarea class="form-control border border-secondary" id="To" onkeyup="adjustHeight(this)" style="overflow:hidden" required></textarea>
+                <textarea class="form-control border border-secondary" id="To" onkeyup="adjustHeight(this)" style="overflow:hidden" readonly></textarea>
               </div>
-            
             <div class="row">
-              <div class="col-sm-6">
-                  <label for="From" class="form-label" style="font-size: small;">From:</label>
-                  <textarea class="form-control border-secondary" id="From"  onkeyup="adjustHeight(this)" placeholder="Enter From" style="font-size: small;overflow:hidden;"></textarea>
-              </div>
-            
-              <div class="col-sm-6">
-                <label for="Destination" class="form-label" style="font-size: small;">Destination :</label>
-                <textarea class="form-control border-secondary" id="Destination" onkeyup="adjustHeight(this)" placeholder="Enter Destination" style="font-size: small;overflow:hidden;"></textarea>
-              </div>
-            </div>
-            
+                <div class="col-sm-6">
+                    <label for="From" class="form-label" style="font-size: small;">From:</label>
+                    <textarea class="form-control border-secondary" id="From"  onkeyup="adjustHeight(this)" placeholder="Enter From" style="font-size: small;overflow:hidden;" readonly></textarea>
+                </div>
+              
+                <div class="col-sm-6">
+                  <label for="Destination" class="form-label" style="font-size: small;">Destination :</label>
+                  <textarea class="form-control border-secondary" id="Destination" onkeyup="adjustHeight(this)" placeholder="Enter Destination" style="font-size: small;overflow:hidden;" readonly></textarea>
+                </div>
+             </div>
+
             <div class="row">
               <div class="col-sm-6">
                 <label for="LRNO" class="form-label" style="font-size: small;">LR.NO:</label>
-                <input type="text" id="LRNO" class="form-control border-secondary" placeholder="" style="font-size: small;"> 
+                <input type="text" id="LRNO" class="form-control border-secondary" placeholder="" style="font-size: small;" readonly> 
               </div>
               <div class="col-sm-6">
                 <label for="Date" class="form-label" style="font-size: small;">Loading Date:</label>
-                <input type="date" id="DatE" class="form-control border-secondary" style="font-size: small;">
+                <input type="date" id="DatE" class="form-control border-secondary" style="font-size: small;" readonly>
               </div> 
             </div>
             
-
+ 
             <div class="row">
                 <div class="col-sm-6">
                     <label for="VehicaleNO" class="form-label" style="font-size: small;">Vehicle No :</label>
-                    <input type="text" id="VehicleNO" class="form-control border-secondary" placeholder="Enter Vehicle Number" style="font-size: small; text-transform:uppercase;" >
+                    <input type="text" id="VehicleNO" class="form-control border-secondary" placeholder="Enter Vehicle Number" style="font-size: small; text-transform:uppercase" readonly>
                 </div>
               
                 <div class="col-sm-6">
                   <label for="VehicleType" class="form-label" style="font-size: small;">Vehicle Type :</label>
-                  <input type="text" id="VehicleType" class="form-control border-secondary" placeholder="Enter Vehicle Type" style="font-size: small; text-transform:uppercase;">
+                  <input type="text" id="VehicleType" class="form-control border-secondary" placeholder="Enter Vehicle Type" style="font-size: small; text-transform:uppercase" readonly>
               </div>
             </div>
 
@@ -90,38 +94,40 @@
                       </thead>
                       <tbody class="table-group-divider border-secondary">
                         <tr>
-                            <td>Fright</td>
-                            <td class="text-center"><Input type="number" class="form-control border-secondary" id="Fright" min="0" style="text-align:center" required></Input></td>
+                          
+                          <td>Fright</td>
+                          <td class="text-center"><input type="number" class="form-control border-secondary "  id="Fright" min="0" style="text-align:center" readonly/></td>
+    
                         </tr>
                         <tr>
                             <td>Extra Permission</td>
-                            <td class="text-center"><Input type="number" class="form-control border-secondary" id="ExtraPermission" min="0" style="text-align:center"></Input></td>
+                            <td class="text-center"><input type="number" class="form-control border-secondary"  id="ExtraPermission" min="0" style="text-align:center" readonly /></td>
                         </tr>
                         <tr>
                             <td>Advance</td>
-                            <td class="text-center"><Input type="number" class="form-control border-secondary" id="Advance" min="0" style="text-align:center"></Input></td>
+                            <td class="text-center"><input type="number"  class="form-control border-secondary"  id="Advance" min="0" style="text-align:center" readonly/></td>
                         </tr>
                         <tr>
-                          <td class="text-end"><Button class="btn" style="width: 100%; text-align: end;" onclick="totalCost()"><b>Total Amount</b></Button></td>
-                          <td class="text-center"><input type="number" class="form-control border-secondary"  id="total" style="color: black; font-weight:bold; text-align: center;"  readonly required></td>
+                          <td class="text-end" style="text-align: end;"> <b>Total Amount</b></td>
+                          <td class="text-center "><input type="number" class="form-control border-secondary" id="total" style="color: black; font-weight:bold; text-align: center;"  readonly ></td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
                 </div>
               </div>
-              <div class="col-md-12" style="text-align: center;">
-
-               <span style="text-align: center">
-              <button type="button" class="btn btn-warning" id="viewBillPage" onclick="window.location.href='./ViewBill.html';" style="color: white;">View Bill</button>
-              <button type="button" class="btn btn-primary" id="Print"  value="Print" onclick="Print()"> <i class="fa fa-print" aria-hidden="true"></i> Print </button> 
-              <input type="submit" class="btn btn-success" id="Submit"  value="Submit" onClick="SubmitForm()">
-              </span>
-              
-              </div>               
+            </form>
+                            
         </div>   
-      
+    
       </div> 
+      <div class="col-md-12 m-2" style="text-align: center;">
+
+        <span style="text-align: center;"> <button type="button" class="btn btn-primary" id="Print"  value="Print" onclick="Print()"> <i class="fa fa-print" aria-hidden="true"></i> Print </button> 
+          <button  type="button" class="btn btn-warning" id="Back" href="./SSCMBillingSystem.html" onclick="window.location.href='./SSCMBillingSystem.html';" style="color: white;">Back</button>
+        </span>
+       
+       </div> 
       <div class="container-fluid p-2" style="margin-top: 10%;" id="Signature">
    
         <p style="text-align:end;">Your Faithfully <br/>Shree Sidhnath Cargo Movers</p>

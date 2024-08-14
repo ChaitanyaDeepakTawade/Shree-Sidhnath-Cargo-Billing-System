@@ -1,6 +1,6 @@
 const billItems = [];
 
-let To , LRNO , From , VehicleNO ,VehicleType , Destination ,BillNo = 1 ;
+let To , LRNO , From , VehicleNO ,VehicleType , Destination ,BillNo = 0 ;
 let Fright = 0 , ExtraPermission = 0 , Advance = 0 , Total=0;
 
 function totalCost(){
@@ -41,8 +41,13 @@ function billNo(){
             try {
               const response = await fetch("https://script.google.com/macros/s/AKfycbyxd2HG3OwRYZTuYtFn_JbyKvt8YHy72Gezqwxp14GgFm7PrkBlLH5JJmyhOMDJ07ud/exec");
               const data = await response.json();
-              BillNo = parseInt(data.data[data.data.length-1]["Bill No"])+1;
-             
+              if(data.data.length == 0 ){
+               
+                BillNo = 1;
+              
+              }else{
+                BillNo = parseInt(data.data[data.data.length-1]["Bill No"])+1;
+              }
               document.getElementById('BillNo').innerHTML = BillNo;
             } catch (error) {
               console.error(error);
@@ -106,4 +111,56 @@ async function SubmitForm()
 
 function adjustHeight(el){
     el.style.height = (el.scrollHeight > el.clientHeight) ? (el.scrollHeight)+"px" : "30px";
+}
+
+
+function search(){
+    const viewbillNo = document.getElementById("BillNoViewReport").value;
+    if (viewbillNo == ''){
+        alert("Please Enter Bill No...! ");
+        document.getElementById("BillNoViewReport").focus();
+    }else
+    {
+        document.getElementById("viewBill").reset();
+        console.log(document.getElementById("BillNoViewReport").value);
+        fetchData();
+    }
+   
+
+    async function fetchData() {
+        try {
+
+            const response = await fetch("https://script.google.com/macros/s/AKfycbyxd2HG3OwRYZTuYtFn_JbyKvt8YHy72Gezqwxp14GgFm7PrkBlLH5JJmyhOMDJ07ud/exec");
+            let data = await response.json();
+            data=data.data;
+    
+         
+
+            let SearchData= data.find((data) => data["Bill No"]==document.getElementById("BillNoViewReport").value);
+            
+            
+            const date = new Date(SearchData.Date);
+            // Format the date to YYYY-MM-DD
+            const formattedDate = date.toISOString().split('T')[0];
+
+            console.log(formattedDate);
+            document.getElementById("DatE").value =  formattedDate;
+            document.getElementById("To").value = SearchData.To;
+            document.getElementById("LRNO").value = SearchData["LR Number"];           ;
+            document.getElementById("From").value = SearchData.From;
+            document.getElementById("Destination").value = SearchData.Destination;
+            document.getElementById("VehicleNO").value = SearchData["Vehicle Number"];
+            document.getElementById("Fright").value = SearchData.Fright;
+            document.getElementById("ExtraPermission").value = SearchData["Extra Charges"];
+            document.getElementById("Advance").value = SearchData.Advance;
+            document.getElementById("total").value = SearchData.Total;
+            document.getElementById("VehicleType").value = SearchData["Vehicle Type"];
+
+      
+
+        } catch (error) {
+          console.error(error);
+        } 
+    }
+    
 }
